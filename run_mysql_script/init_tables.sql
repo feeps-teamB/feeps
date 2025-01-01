@@ -1,14 +1,14 @@
 CREATE DATABASE if NOT EXISTS task_reaper;
 USE task_reaper;
 
-DROP TABLE IF EXISTS Schedules;
-DROP TABLE IF EXISTS Categories;
-DROP TABLE IF EXISTS UserTeams;
-DROP TABLE IF EXISTS Teams;
-DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS schedules;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS user_teams;
+DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS users;
 
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(16) NOT NULL UNIQUE, 
     password VARCHAR(32) NOT NULL, 
@@ -16,29 +16,29 @@ CREATE TABLE IF NOT EXISTS Users (
     PRIMARY KEY(user_id) 
 );
 
-CREATE TABLE IF NOT EXISTS Teams (
+CREATE TABLE IF NOT EXISTS teams (
     team_id INT NOT NULL AUTO_INCREMENT, 
     name VARCHAR(16) NOT NULL UNIQUE, 
     description VARCHAR(200), 
     PRIMARY KEY(team_id)
 );
 
-CREATE TABLE IF NOT EXISTS UserTeams (
+CREATE TABLE IF NOT EXISTS user_teams (
     user_team_id INT NOT NULL AUTO_INCREMENT, 
     user_id INT NOT NULL, 
     team_id INT NOT NULL, 
     PRIMARY KEY(user_team_id), 
     FOREIGN KEY(user_id)
-        REFERENCES Users(user_id)
+        REFERENCES users(user_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY(team_id)
-        REFERENCES Teams(team_id)
+        REFERENCES teams(team_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Categories (
+CREATE TABLE IF NOT EXISTS categories (
     category_id INT NOT NULL AUTO_INCREMENT, 
     team_id INT NOT NULL, 
     name VARCHAR(16) NOT NULL, 
@@ -47,13 +47,13 @@ CREATE TABLE IF NOT EXISTS Categories (
     updated_at DATE NOT NULL, 
     PRIMARY KEY(category_id), 
     FOREIGN KEY(team_id)
-        REFERENCES Teams(team_id)
+        REFERENCES teams(team_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
 
-CREATE TABLE IF NOT EXISTS Schedules (
+CREATE TABLE IF NOT EXISTS schedules (
     schedule_id INT NOT NULL AUTO_INCREMENT, 
     category_id INT NOT NULL, 
     title VARCHAR(32) NOT NULL, 
@@ -63,13 +63,13 @@ CREATE TABLE IF NOT EXISTS Schedules (
     is_completed BOOLEAN NOT NULL DEFAULT FALSE, 
     PRIMARY KEY(schedule_id), 
     FOREIGN KEY(category_id)
-        REFERENCES Categories(category_id)
+        REFERENCES categories(category_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
-DESC Users;
-DESC Teams;
-DESC UserTeams;
-DESC Categories;
-DESC Schedules;
+DESC users;
+DESC teams;
+DESC user_teams;
+DESC categories;
+DESC schedules;
