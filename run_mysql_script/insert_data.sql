@@ -18,10 +18,10 @@ INSERT INTO user_teams (user_id, team_id) VALUES
 (3, 2); -- 高橋洋子は営業チームに所属
 
 -- categoriesテーブル
-INSERT INTO categories (team_id, name, color, created_at, updated_at) VALUES
-(1, '設計', '#FF5733', '2024-12-01', '2024-12-01'),
-(1, 'テスト', '#33FF57', '2024-12-01', '2024-12-01'),
-(2, '顧客管理', '#5733FF', '2024-12-02', '2024-12-02');
+INSERT INTO categories (team_id, name, color) VALUES
+(1, '設計', '#FF5733'),
+(1, 'テスト', '#33FF57'),
+(2, '顧客管理', '#5733FF');
 
 -- schedulesテーブル
 INSERT INTO schedules (category_id, title, description, start_date, end_date, is_completed) VALUES
