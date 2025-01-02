@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS categories (
     team_id INT NOT NULL, 
     name VARCHAR(16) NOT NULL, 
     color VARCHAR(7) NOT NULL, 
-    created_at DATE NOT NULL, 
-    updated_at DATE NOT NULL, 
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
     PRIMARY KEY(category_id), 
     FOREIGN KEY(team_id)
         REFERENCES teams(team_id)
@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS schedules (
     start_date DATE NOT NULL, 
     end_date DATE NOT NULL, 
     is_completed BOOLEAN NOT NULL DEFAULT FALSE, 
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
     PRIMARY KEY(schedule_id), 
     FOREIGN KEY(category_id)
         REFERENCES categories(category_id)
